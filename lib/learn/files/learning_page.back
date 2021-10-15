@@ -1,0 +1,236 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:flutter/material.dart';
+import 'methods/methods.dart';
+import '../app_theme.dart';
+import 'dart:async';
+import 'package:flutter_tts/flutter_tts.dart';
+
+class LearningPage extends StatefulWidget {
+  const LearningPage({Key? key}) : super(key: key);
+
+  @override
+  _LearningPageState createState() => _LearningPageState();
+}
+
+class _LearningPageState extends State<LearningPage>
+    with TickerProviderStateMixin {
+  bool isMuted = false;
+  bool isExpanded = false;
+  late FlutterTts flutterTts;
+  late Animation<double> verticalMargin;
+  late Animation<double> verticalMargin2;
+  late Animation<double> verticalMargin3;
+  late AnimationController controller;
+  final duration = const Duration(milliseconds: 200);
+
+  late double volume;
+  double pitch = 1.0;
+  double rate = 0.5;
+  Map<String, String> text = {};
+  @override
+  void initState() {
+    super.initState();
+    flutterTts = FlutterTts();
+    volume = 0.5;
+    controller = AnimationController(vsync: this, duration: duration);
+
+    final anim = CurvedAnimation(parent: controller, curve: Curves.linear);
+    verticalMargin = Tween<double>(begin: 0, end: 60.0).animate(anim);
+    verticalMargin2 = Tween<double>(begin: 0, end: 120.0).animate(anim);
+    verticalMargin3 = Tween<double>(begin: 0, end: 180.0).animate(anim);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    flutterTts.stop();
+  }
+
+  final Stream<List> _stream = Stream.value(getLessons());
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppTheme.darkGrey,
+      body: StreamBuilder(
+        stream: _stream,
+        builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+          if (snapshot.hasData) {
+            for (var item in snapshot.data!) {
+              text[getTitle(item)] = getContent(item);
+            }
+          }
+          return Padding(
+            padding: const EdgeInsets.only(top: 16, left: 12, right: 12),
+            child: StreamBuilder<List>(
+              builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+                if (!snapshot.hasData) {
+                  return const SizedBox();
+                } else {
+                  return ListView(
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.vertical,
+                    children: List<Widget>.generate(
+                      getLessons().length,
+                      (int index) {
+                        return _write(
+                          snapshot.data!.elementAt(index),
+                        );
+                      },
+                    ),
+                  );
+                }
+              },
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _write(MapEntry m) {
+    _speak(m.value);
+    return Stack(
+      children: [
+        SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          child: ListView(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: AnimatedTextKit(
+                  animatedTexts: [
+                    TyperAnimatedText(
+                      m.key,
+                      textAlign: TextAlign.center,
+                      textStyle: AppTheme.display1.copyWith(
+                        color: AppTheme.notWhite,
+                      ),
+                    ),
+                  ],
+                  isRepeatingAnimation: false,
+                  stopPauseOnTap: false,
+                  repeatForever: false,
+                ),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  AnimatedTextKit(
+                    animatedTexts: [
+                      TyperAnimatedText(
+                        m.value,
+                        textAlign: TextAlign.start,
+                        textStyle: AppTheme.body1.copyWith(
+                          color: AppTheme.notWhite,
+                          fontSize: 18.0,
+                          fontFamily: "Roboto",
+                        ),
+                      ),
+                    ],
+                    isRepeatingAnimation: false,
+                    stopPauseOnTap: false,
+                    repeatForever: false,
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+        Align(
+          alignment: Alignment.topRight,
+          child: SizedBox(
+              width: 80.0,
+              child: AnimatedBuilder(
+                animation: controller,
+                builder: (context, child) {
+                  return Stack(
+                    children: <Widget>[
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Container(
+                          margin: EdgeInsets.only(top: verticalMargin.value),
+                          child: CircleAvatar(
+                            backgroundColor: AppTheme.darkerText,
+                            child: IconButton(
+                                onPressed: () {
+                                  //
+                                },
+                                icon: const Icon(Icons.arrow_back_ios)),
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Container(
+                          margin: EdgeInsets.only(top: verticalMargin2.value),
+                          child: CircleAvatar(
+                            backgroundColor: AppTheme.darkerText,
+                            child: IconButton(
+                              onPressed: () {
+                                //
+                              },
+                              icon: const Icon(Icons.arrow_forward_ios),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: Container(
+                          margin: EdgeInsets.only(top: verticalMargin3.value),
+                          child: CircleAvatar(
+                            backgroundColor: AppTheme.darkerText,
+                            child: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  isMuted = !isMuted;
+                                  isMuted ? volume = 0.0 : volume = 0.5;
+                                });
+                              },
+                              icon: isMuted
+                                  ? const Icon(Icons.volume_off)
+                                  : const Icon(Icons.volume_up),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: CircleAvatar(
+                          backgroundColor: AppTheme.grey,
+                          child: IconButton(
+                            onPressed: () {
+                              controller.isCompleted
+                                  ? controller.reverse()
+                                  : controller.forward();
+                            },
+                            icon: Icon(
+                              controller.isCompleted || controller.isAnimating
+                                  ? Icons.close
+                                  : Icons.circle_outlined,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              )),
+        ),
+      ],
+    );
+  }
+
+  Future _speak(String newVoiceText) async {
+    await flutterTts.setVolume(volume);
+    await flutterTts.setSpeechRate(rate);
+    await flutterTts.setPitch(pitch);
+    if (newVoiceText.isNotEmpty) {
+      await flutterTts.awaitSpeakCompletion(true);
+      await flutterTts.speak(newVoiceText);
+      //flutterTts.progressHandler!(_newVoiceText);
+    }
+  }
+}
