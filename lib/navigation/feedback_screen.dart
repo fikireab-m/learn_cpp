@@ -1,4 +1,3 @@
-import '/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class FeedbackScreen extends StatefulWidget {
@@ -17,11 +16,9 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppTheme.nearlyWhite,
       child: SafeArea(
         top: false,
         child: Scaffold(
-          backgroundColor: AppTheme.nearlyWhite,
           body: SingleChildScrollView(
             child: SizedBox(
               height: MediaQuery.of(context).size.height,
@@ -110,7 +107,6 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
       padding: const EdgeInsets.only(top: 8, left: 32, right: 32),
       child: Container(
         decoration: BoxDecoration(
-          color: AppTheme.white,
           borderRadius: BorderRadius.circular(8),
           boxShadow: <BoxShadow>[
             BoxShadow(
@@ -124,7 +120,6 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
           child: Container(
             padding: const EdgeInsets.all(4.0),
             constraints: const BoxConstraints(minHeight: 80, maxHeight: 160),
-            color: AppTheme.white,
             child: SingleChildScrollView(
               padding:
                   const EdgeInsets.only(left: 10, right: 10, top: 0, bottom: 0),
@@ -132,9 +127,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 maxLines: null,
                 onChanged: (String txt) {},
                 style: const TextStyle(
-                  fontFamily: AppTheme.fontName,
                   fontSize: 16,
-                  color: AppTheme.darkGrey,
                 ),
                 cursorColor: Colors.blue,
                 decoration: const InputDecoration(

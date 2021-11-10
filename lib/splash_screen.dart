@@ -1,10 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:learn_cpp/app_theme.dart';
 import 'package:learn_cpp/navigation/navigation_home_screen.dart';
 
 class MyCustomSplashScreen extends StatefulWidget {
+  const MyCustomSplashScreen({Key? key}) : super(key: key);
+
   @override
   _MyCustomSplashScreenState createState() => _MyCustomSplashScreenState();
 }
@@ -24,7 +25,7 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen>
     super.initState();
 
     _controller =
-        AnimationController(vsync: this, duration: Duration(seconds: 3));
+        AnimationController(vsync: this, duration: const Duration(seconds: 3));
 
     animation1 = Tween<double>(begin: 40, end: 20).animate(CurvedAnimation(
         parent: _controller, curve: Curves.fastLinearToSlowEaseIn))
@@ -36,13 +37,13 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen>
 
     _controller.forward();
 
-    Timer(Duration(seconds: 2), () {
+    Timer(const Duration(seconds: 2), () {
       setState(() {
         _fontSize = 1.06;
       });
     });
 
-    Timer(Duration(seconds: 2), () {
+    Timer(const Duration(seconds: 2), () {
       setState(() {
         _containerSize = 2;
         _containerOpacity = 1;
@@ -69,17 +70,17 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen>
     double _height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: AppTheme.darkGrey,
+      backgroundColor: Colors.black38,
       body: Stack(
         children: [
           Column(
             children: [
               AnimatedContainer(
-                  duration: Duration(milliseconds: 2000),
+                  duration: const Duration(milliseconds: 2000),
                   curve: Curves.fastLinearToSlowEaseIn,
                   height: _height / _fontSize),
               AnimatedOpacity(
-                duration: Duration(milliseconds: 1000),
+                duration: const Duration(milliseconds: 1000),
                 opacity: _textOpacity,
                 child: Text(
                   'My Classroom',
@@ -94,24 +95,24 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen>
           ),
           Center(
             child: AnimatedOpacity(
-              duration: Duration(milliseconds: 2000),
+              duration: const Duration(milliseconds: 2000),
               curve: Curves.fastLinearToSlowEaseIn,
               opacity: _containerOpacity,
               child: AnimatedContainer(
-                duration: Duration(milliseconds: 2000),
+                duration: const Duration(milliseconds: 2000),
                 curve: Curves.fastLinearToSlowEaseIn,
                 height: _width / _containerSize,
                 width: _width / _containerSize,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: AppTheme.white,
+                  color: Colors.white.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(30),
                 ),
                 // child: Image.asset('assets/images/file_name.png')
-                child: Text(
+                child: const Text(
                   'MY APP LOGO',
-                  style: AppTheme.headline.copyWith(
-                    color: AppTheme.darkGrey,
+                  style: TextStyle(
+                    fontSize: 24,
                   ),
                 ),
               ),

@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:learn_cpp/app_theme.dart';
 import 'package:provider/provider.dart';
 import 'model/outline.dart';
 import 'model/outlines.dart';
 
 class CourseOutlinePage extends StatefulWidget {
   const CourseOutlinePage({
-    required this.myAppBar,
     Key? key,
   }) : super(key: key);
-
-  final Widget myAppBar;
 
   @override
   _CourseOutlinePageState createState() => _CourseOutlinePageState();
@@ -56,7 +52,6 @@ class _CourseOutlinePageState extends State<CourseOutlinePage>
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                widget.myAppBar,
                 Expanded(
                   child: FutureBuilder<bool>(
                     future: getData(),
@@ -150,19 +145,19 @@ class OutlineListView extends StatelessWidget {
                       horizontal: 12,
                       vertical: 32,
                     ),
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(24.0),
-                      ),
-                      color: AppTheme.nearlyBlack,
-                    ),
+                    decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(24.0),
+                        ),
+                        color: Colors.blue.withOpacity(0.8)),
                     child: Row(
                       children: <Widget>[
                         Text(
                           listData!.number,
-                          style: AppTheme.headline.copyWith(
-                            color: AppTheme.white.withOpacity(.5),
+                          style: TextStyle(
                             fontSize: 32,
+                            color: Colors.grey.withOpacity(0.8),
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                         const SizedBox(width: 20),
@@ -171,15 +166,14 @@ class OutlineListView extends StatelessWidget {
                             children: [
                               TextSpan(
                                 text: "${listData!.duration} mins\n",
-                                style: AppTheme.body1.copyWith(
-                                  color: AppTheme.white,
+                                style: const TextStyle(
+                                  fontSize: 16.0,
                                 ),
                               ),
                               TextSpan(
                                 text: listData!.title,
-                                style: AppTheme.title.copyWith(
+                                style: const TextStyle(
                                   fontWeight: FontWeight.w600,
-                                  color: AppTheme.white,
                                   height: 1.5,
                                 ),
                               ),
@@ -189,13 +183,18 @@ class OutlineListView extends StatelessWidget {
                         const Spacer(),
                         GestureDetector(
                           onTap: callBack,
-                          child: const CircleAvatar(
-                            radius: 24.0,
-                            backgroundColor: AppTheme.grey,
-                            child: Icon(
+                          child: Container(
+                            margin: const EdgeInsets.only(left: 20),
+                            height: 40,
+                            width: 40,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Color(0x5f000050),
+                            ),
+                            child: const Icon(
                               Icons.play_arrow,
-                              size: 30,
-                              color: AppTheme.green,
+                              size: 32,
+                              color: Colors.green,
                             ),
                           ),
                         )
@@ -213,15 +212,16 @@ class OutlineListView extends StatelessWidget {
                       borderRadius: BorderRadius.all(
                         Radius.circular(8.0),
                       ),
-                      color: AppTheme.notWhite,
+                      color: Colors.black26,
                     ),
                     child: Row(
                       children: <Widget>[
                         Text(
                           listData!.number,
-                          style: AppTheme.headline.copyWith(
-                            color: AppTheme.darkText.withOpacity(.15),
+                          style: TextStyle(
                             fontSize: 32,
+                            color: Colors.grey.withOpacity(0.2),
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                         const SizedBox(width: 20),
@@ -230,15 +230,14 @@ class OutlineListView extends StatelessWidget {
                             children: [
                               TextSpan(
                                 text: "${listData!.duration} mins\n",
-                                style: AppTheme.body1.copyWith(
-                                  color: AppTheme.darkText,
+                                style: const TextStyle(
+                                  fontSize: 16,
                                 ),
                               ),
                               TextSpan(
                                 text: listData!.title,
-                                style: AppTheme.title.copyWith(
+                                style: const TextStyle(
                                   fontWeight: FontWeight.w600,
-                                  color: AppTheme.darkText,
                                   height: 1.5,
                                 ),
                               ),
@@ -254,11 +253,12 @@ class OutlineListView extends StatelessWidget {
                             width: 40,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: AppTheme.green
+                              color: Colors.green
                                   .withOpacity(listData!.isDone ? 1 : 0.3),
                             ),
-                            child: const Icon(Icons.play_arrow,
-                                color: Colors.white),
+                            child: const Icon(
+                              Icons.play_arrow,
+                            ),
                           ),
                         )
                       ],

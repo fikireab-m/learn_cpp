@@ -1,4 +1,3 @@
-import '/app_theme.dart';
 import '/custom_drawer/drawer_user_controller.dart';
 import '/custom_drawer/home_drawer.dart';
 import 'feedback_screen.dart';
@@ -31,7 +30,6 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
       top: true,
       bottom: false,
       child: Scaffold(
-        backgroundColor: AppTheme.nearlyWhite,
         body: DrawerUserController(
           screenIndex: drawerIndex,
           drawerWidth: MediaQuery.of(context).size.width * 0.75,

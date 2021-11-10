@@ -1,9 +1,8 @@
 import 'dart:collection';
 
 import 'package:flutter/foundation.dart';
-import 'package:learn_cpp/learn/model/outline.dart';
+import '/home/learn/model/outline.dart';
 
-import '../learning.dart';
 import '../learning_page.dart';
 
 class OutlinesList with ChangeNotifier {
@@ -14,49 +13,49 @@ class OutlinesList with ChangeNotifier {
       title: "welcome",
       isDone: true,
       isActive: true,
-      navigateScreen: LearningPage(),
+      navigateScreen: const LearningPage(),
     ),
     CourseOutline(
       number: "01",
       duration: "5:35",
       title: "Introduction",
       isDone: false,
-      navigateScreen: LearningPage(),
+      navigateScreen: const LearningPage(),
     ),
     CourseOutline(
       number: "02",
       duration: "15:23",
       title: "What's Programming?",
       isDone: false,
-      navigateScreen: LearningPage(),
+      navigateScreen: const LearningPage(),
     ),
     CourseOutline(
       number: "03",
       duration: "8:05",
       title: "What's C++?",
       isDone: false,
-      navigateScreen: LearningPage(),
+      navigateScreen: const LearningPage(),
     ),
     CourseOutline(
       number: "04",
       duration: "21.13",
       title: "Basics of C++",
       isDone: false,
-      navigateScreen: LearningPage(),
+      navigateScreen: const LearningPage(),
     ),
     CourseOutline(
       number: "05",
       duration: "5.25",
       title: "Syntax of C++",
       isDone: false,
-      navigateScreen: LearningPage(),
+      navigateScreen: const LearningPage(),
     ),
     CourseOutline(
       number: "06",
       duration: "5.05",
       title: "History",
       isDone: false,
-      navigateScreen: LearningPage(),
+      navigateScreen: const LearningPage(),
     ),
   ];
 

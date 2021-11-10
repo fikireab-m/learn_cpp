@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "250686257665",
+    "project_id": "learncpp-bfeb9",
+    "storage_bucket": "learncpp-bfeb9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:250686257665:android:955176b01426f83e199e00",
+        "android_client_info": {
+          "package_name": "com.brannatech.learn_cpp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "250686257665-o14ifbtd4rl9e6jg2ts4rg3ou5cgj5ro.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzlo7JV6xk0wPLBLOqW-lSW51a1_b-2NA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "250686257665-o14ifbtd4rl9e6jg2ts4rg3ou5cgj5ro.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

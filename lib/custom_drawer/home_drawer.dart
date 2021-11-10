@@ -1,4 +1,3 @@
-import '/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class HomeDrawer extends StatefulWidget {
@@ -64,7 +63,6 @@ class _HomeDrawerState extends State<HomeDrawer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.notWhite.withOpacity(0.5),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -99,7 +97,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                               shape: BoxShape.circle,
                               boxShadow: <BoxShadow>[
                                 BoxShadow(
-                                    color: AppTheme.grey.withOpacity(0.6),
+                                    color: Colors.grey.withOpacity(0.6),
                                     offset: const Offset(2.0, 4.0),
                                     blurRadius: 8),
                               ],
@@ -117,10 +115,9 @@ class _HomeDrawerState extends State<HomeDrawer> {
                   const Padding(
                     padding: EdgeInsets.only(top: 8, left: 4),
                     child: Text(
-                      'Sara Sleshi',
+                      'Student name',
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
-                        color: AppTheme.grey,
                         fontSize: 18,
                       ),
                     ),
@@ -134,7 +131,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
           ),
           Divider(
             height: 1,
-            color: AppTheme.grey.withOpacity(0.6),
+            color: Colors.grey.withOpacity(0.6),
           ),
           Expanded(
             child: ListView.builder(
@@ -148,7 +145,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
           ),
           Divider(
             height: 1,
-            color: AppTheme.grey.withOpacity(0.6),
+            color: Colors.grey.withOpacity(0.6),
           ),
           Column(
             children: <Widget>[
@@ -156,10 +153,9 @@ class _HomeDrawerState extends State<HomeDrawer> {
                 title: const Text(
                   'Sign Out',
                   style: TextStyle(
-                    fontFamily: AppTheme.fontName,
+                    fontFamily: "Worksans",
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
-                    color: AppTheme.darkText,
                   ),
                   textAlign: TextAlign.left,
                 ),
@@ -224,13 +220,13 @@ class _HomeDrawerState extends State<HomeDrawer> {
                           height: 24,
                           child: Image.asset(listData.imageName,
                               color: widget.screenIndex == listData.index
-                                  ? Colors.blue
-                                  : AppTheme.nearlyBlack),
+                                  ? Colors.blueAccent
+                                  : Theme.of(context).iconTheme.color),
                         )
                       : Icon(listData.icon?.icon,
                           color: widget.screenIndex == listData.index
-                              ? Colors.blue
-                              : AppTheme.nearlyBlack),
+                              ? Colors.blueAccent
+                              : Theme.of(context).iconTheme.color),
                   const Padding(
                     padding: EdgeInsets.all(4.0),
                   ),
@@ -240,8 +236,8 @@ class _HomeDrawerState extends State<HomeDrawer> {
                       fontWeight: FontWeight.w500,
                       fontSize: 16,
                       color: widget.screenIndex == listData.index
-                          ? Colors.blue
-                          : AppTheme.nearlyBlack,
+                          ? Colors.lightBlueAccent
+                          : Theme.of(context).textTheme.headline4?.color,
                     ),
                     textAlign: TextAlign.left,
                   ),

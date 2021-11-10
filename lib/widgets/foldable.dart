@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:learn_cpp/app_theme.dart';
 import 'package:learn_cpp/navigation/navigation_home_screen.dart';
 
 class FoldableOptions extends StatefulWidget {
@@ -60,7 +59,6 @@ class _FoldableOptionsState extends State<FoldableOptions>
       ),
       child: Icon(
         source,
-        color: AppTheme.darkGrey,
         size: 20,
       ),
     );

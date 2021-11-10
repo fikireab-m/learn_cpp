@@ -312,7 +312,7 @@ class _InstructorSimulatorState extends State<InstructorSimulator> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         ElevatedButton(
-          child: Text('Get max speech input length'),
+          child: const Text('Get max speech input length'),
           onPressed: () async {
             _inputLength = await flutterTts.getMaxSpeechInputLength;
             setState(() {});
